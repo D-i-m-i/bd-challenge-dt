@@ -4,14 +4,15 @@ import "./App.css";
 import { Button, Input } from "antd";
 
 export const UserRegistration = () => {
-  const [username, setUsername] = useState("");
+  const [fullname, setFullname] = useState("");
   const [password, setPassword] = useState("");
 
   const doUserRegistration = async function () {
-    const usernameValue = username;
+    const fullnameValue = fullname;
     const passwordValue = password;
+
     try {
-      const createdUser = await Parse.User.signUp(usernameValue, passwordValue);
+      const createdUser = await Parse.User.signUp(fullnameValue, passwordValue);
       alert(
         `Success! User ${createdUser.getUsername()} was successfully created!`
       );
@@ -37,9 +38,9 @@ export const UserRegistration = () => {
         <h2 className="heading">{"User Registration"}</h2>
         <div className="form_wrapper">
           <Input
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
-            placeholder="Username"
+            value={fullname}
+            onChange={(event) => setFullname(event.target.value)}
+            placeholder="Full name"
             size="large"
             className="form_input"
           />
