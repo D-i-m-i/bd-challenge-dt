@@ -116,7 +116,7 @@ export const UserLogin = () => {
               "username"
             )}! To logout click`}</h2>
           </div>
-          <div style={{ margin: "0 0 0 5px" }}>
+          <div style={{ margin: "12px 0 0 5px" }}>
             <Button
               onClick={() => doUserLogOut()}
               type="primary"
