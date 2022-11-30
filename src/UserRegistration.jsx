@@ -24,16 +24,6 @@ export const UserRegistration = () => {
 
   return (
     <div>
-      {/* <div className="header">
-        <img
-          className="header_logo"
-          alt="BDSwiss logo"
-          src={
-            "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fhandeln.com%2Fwp-content%2Fuploads%2F2018%2F09%2Fbdswiss-logo.jpg&f=1&nofb=1&ipt=f266f1cf1bac1c0a6b1f86723f05e4ff88234b90a4349704b02e1cea9181101a&ipo=images"
-          }
-        />
-        <p className="header_text_bold">{"Demetris' Challenge App"}</p>
-      </div> */}
       <div className="container">
         <h2 className="heading">{"User Registration"}</h2>
         <div className="form_wrapper">
