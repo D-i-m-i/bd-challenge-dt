@@ -1,6 +1,7 @@
 import "./App.css";
 import Parse from "parse/dist/parse.min.js";
 import { UserRegistration } from "./UserRegistration";
+import { UserLogin } from "./UserLogin";
 
 const PARSE_APPLICATION_ID = "obibBs4tAKCfeo4BWvzyUoFgmVAdM1fFPr6dlBUT";
 const PARSE_HOST_URL = "https://parseapi.back4app.com/";
@@ -12,7 +13,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <UserRegistration />
+        {/* <UserRegistration /> */}
+        <UserLogin />
       </header>
     </div>
   );
