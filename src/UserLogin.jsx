@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Parse from "parse/dist/parse.min.js";
 import "./App.css";
 import { Button, Input } from "antd";
+import { UserRegistration } from "./UserRegistration";
 
 export const UserLogin = () => {
   const [fullname, setFullname] = useState("");
@@ -102,12 +103,10 @@ export const UserLogin = () => {
               Log In
             </Button>
           </div>
-          <p className="form__hint">
-            Don't have an account?{" "}
-            <a className="form__link" href="#">
-              Sign up
-            </a>
+          <p style={{ marginTop: "40px" }}>
+            Are you a new user? Register below!{" "}
           </p>
+          <UserRegistration />
         </div>
       )}
       {currentUser !== null && (
@@ -117,13 +116,14 @@ export const UserLogin = () => {
               "username"
             )}! To logout click`}</h2>
           </div>
-          <div style={{ margin: "0 0 0 2px" }}>
+          <div style={{ margin: "0 0 0 5px" }}>
             <Button
               onClick={() => doUserLogOut()}
               type="primary"
-              className="form_button"
+              className="logout_button"
               color={"#208AEC"}
               size="large"
+              danger
             >
               here
             </Button>

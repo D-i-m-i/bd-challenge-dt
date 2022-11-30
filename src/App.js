@@ -1,6 +1,5 @@
 import "./App.css";
 import Parse from "parse/dist/parse.min.js";
-import { UserRegistration } from "./UserRegistration";
 import { UserLogin } from "./UserLogin";
 
 const PARSE_APPLICATION_ID = "obibBs4tAKCfeo4BWvzyUoFgmVAdM1fFPr6dlBUT";
@@ -13,7 +12,6 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {/* <UserRegistration /> */}
         <UserLogin />
       </header>
     </div>
