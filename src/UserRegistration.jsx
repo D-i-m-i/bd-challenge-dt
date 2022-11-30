@@ -24,7 +24,7 @@ export const UserRegistration = () => {
 
   return (
     <div>
-      <div className="header">
+      {/* <div className="header">
         <img
           className="header_logo"
           alt="BDSwiss logo"
@@ -33,7 +33,7 @@ export const UserRegistration = () => {
           }
         />
         <p className="header_text_bold">{"Demetris' Challenge App"}</p>
-      </div>
+      </div> */}
       <div className="container">
         <h2 className="heading">{"User Registration"}</h2>
         <div className="form_wrapper">
