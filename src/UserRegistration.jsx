@@ -16,6 +16,10 @@ export const UserRegistration = () => {
       alert(
         `Success! User ${createdUser.getUsername()} was successfully created!`
       );
+
+      // clears the input fields upon a successful registration
+      setFullname("");
+      setPassword("");
       return true;
     } catch (error) {
       alert(`Error! ${error}`);
@@ -30,7 +34,7 @@ export const UserRegistration = () => {
           <Input
             value={fullname}
             onChange={(event) => setFullname(event.target.value)}
-            placeholder="Full name"
+            placeholder="Full name (username)"
             size="large"
             className="form_input"
           />
