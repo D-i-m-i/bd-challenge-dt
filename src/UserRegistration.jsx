@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Parse from "parse/dist/parse.min.js";
 import "./App.css";
 import { Button, Input } from "antd";
+import bcrypt from "bcryptjs";
 
 export const UserRegistration = () => {
   const [fullname, setFullname] = useState("");
@@ -9,12 +10,15 @@ export const UserRegistration = () => {
 
   const doUserRegistration = async function () {
     const fullnameValue = fullname;
-    const passwordValue = password;
+    const passwordValue = bcrypt.hashSync(
+      password,
+      "$2a$10$CwTycUXWue0Thq9StjUM0u"
+    );
 
     try {
       const createdUser = await Parse.User.signUp(fullnameValue, passwordValue);
       alert(
-        `Success! User ${createdUser.getUsername()} was successfully created!`
+        `User ${createdUser.getUsername()} was successfully created. You can now login.`
       );
 
       // clears the input fields upon a successful registration
