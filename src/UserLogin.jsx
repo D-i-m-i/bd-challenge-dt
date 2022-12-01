@@ -14,8 +14,8 @@ export const UserLogin = () => {
     const fullnameValue = fullname;
     const passwordValue = password;
     try {
-      const loggedInUser = await Parse.User.logIn(fullnameValue, passwordValue);
       // logIn returns the corresponding ParseUser object
+      const loggedInUser = await Parse.User.logIn(fullnameValue, passwordValue);
       alert(
         `Success! User ${loggedInUser.get(
           "username"
@@ -78,7 +78,7 @@ export const UserLogin = () => {
             <Input
               value={fullname}
               onChange={(event) => setFullname(event.target.value)}
-              placeholder="Full Name"
+              placeholder="Full Name (username)"
               size="large"
               className="form_input"
             />
