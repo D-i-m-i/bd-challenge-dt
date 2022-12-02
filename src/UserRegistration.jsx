@@ -10,19 +10,21 @@ export const UserRegistration = () => {
   const doUserRegistration = async function () {
     const fullnameValue = fullname;
     const passwordValue = password;
+    const passRegex = new RegExp("^(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");
+    // while pass does not meet conditions prompt to re-enter password
 
-    try {
+    if (passRegex.test(passwordValue)) {
       const createdUser = await Parse.User.signUp(fullnameValue, passwordValue);
-      alert(
-        `Success! User ${createdUser.getUsername()} was successfully created!`
-      );
-
+      alert(`User ${createdUser.getUsername()} was successfully created!`);
       // clears the input fields upon a successful registration
       setFullname("");
       setPassword("");
       return true;
-    } catch (error) {
-      alert(`Error! ${error}`);
+    } else {
+      // alert(`Error! ${error}`)
+      alert(
+        `Password must be a minimum of 8 characters and including at least one number and one special character`
+      );
     }
   };
 

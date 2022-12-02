@@ -16,11 +16,7 @@ export const UserLogin = () => {
     try {
       // logIn returns the corresponding ParseUser object
       const loggedInUser = await Parse.User.logIn(fullnameValue, passwordValue);
-      alert(
-        `Success! User ${loggedInUser.get(
-          "username"
-        )} has successfully signed in!`
-      );
+      alert(`${loggedInUser.get("username")} has successfully signed in!`);
       // To verify that this is in fact the current user, `current` can be used
       const currentUser = await Parse.User.current();
       console.log(loggedInUser === currentUser);
@@ -43,7 +39,7 @@ export const UserLogin = () => {
       // To verify that current user is now empty, currentAsync can be used
       const currentUser = await Parse.User.current();
       if (currentUser === null) {
-        alert("Success! No user is logged in anymore!");
+        alert("Logged out successfully!");
       }
       // Update state variable holding current user
       getCurrentUser();
