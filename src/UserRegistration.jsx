@@ -2,14 +2,19 @@ import React, { useState } from "react";
 import Parse from "parse/dist/parse.min.js";
 import "./App.css";
 import { Button, Input } from "antd";
+import bcrypt from "bcryptjs";
 
 export const UserRegistration = () => {
   const [fullname, setFullname] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
 
   const doUserRegistration = async function () {
     const fullnameValue = fullname;
-    const passwordValue = password;
+    const passwordValue = bcrypt.hashSync(
+      password,
+      "$2a$10$CwTycUXWue0Thq9StjUM0u"
+    );
     const passRegex = new RegExp("^(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");
     // while pass does not meet conditions prompt to re-enter password
 
@@ -19,11 +24,12 @@ export const UserRegistration = () => {
       // clears the input fields upon a successful registration
       setFullname("");
       setPassword("");
+      setEmail("");
       return true;
     } else {
       // alert(`Error! ${error}`)
       alert(
-        `Password must be a minimum of 8 characters and including at least one number and one special character`
+        `Password must be a minimum of 8 characters and including at least one number and one special character.`
       );
     }
   };
@@ -46,6 +52,13 @@ export const UserRegistration = () => {
             placeholder="Password"
             size="large"
             type="password"
+            className="form_input"
+          />
+          <Input
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            placeholder="Email"
+            size="large"
             className="form_input"
           />
         </div>

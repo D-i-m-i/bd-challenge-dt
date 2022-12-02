@@ -52,3 +52,11 @@
 .logout_button {
   width: 100%;
 }
+
+.container {
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+  padding: 20px 0;
+  text-align: left;
+}
