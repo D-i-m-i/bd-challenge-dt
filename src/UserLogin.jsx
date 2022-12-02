@@ -3,6 +3,7 @@ import Parse from "parse/dist/parse.min.js";
 import "./App.css";
 import { Button, Input } from "antd";
 import { UserRegistration } from "./UserRegistration";
+import bcrypt from "bcryptjs";
 
 export const UserLogin = () => {
   const [fullname, setFullname] = useState("");
@@ -12,7 +13,10 @@ export const UserLogin = () => {
   const doUserLogIn = async function () {
     // Note that these values come from state variables that we've declared before
     const fullnameValue = fullname;
-    const passwordValue = password;
+    const passwordValue = bcrypt.hashSync(
+      password,
+      "$2a$10$CwTycUXWue0Thq9StjUM0u"
+    );
     try {
       // logIn returns the corresponding ParseUser object
       const loggedInUser = await Parse.User.logIn(fullnameValue, passwordValue);
@@ -36,11 +40,6 @@ export const UserLogin = () => {
   const doUserLogOut = async function () {
     try {
       await Parse.User.logOut();
-      // To verify that current user is now empty, currentAsync can be used
-      const currentUser = await Parse.User.current();
-      if (currentUser === null) {
-        alert("Logged out successfully!");
-      }
       // Update state variable holding current user
       getCurrentUser();
       return true;
@@ -56,7 +55,7 @@ export const UserLogin = () => {
   };
 
   return (
-    <div>
+    <div style={{ width: "500px" }}>
       <div className="header">
         <img
           className="header_logo"
