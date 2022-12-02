@@ -13,6 +13,7 @@ export const UserLogin = () => {
   const doUserLogIn = async function () {
     // Note that these values come from state variables that we've declared before
     const fullnameValue = fullname;
+    // reading the password using bcrypt used during registration
     const passwordValue = bcrypt.hashSync(
       password,
       "$2a$10$CwTycUXWue0Thq9StjUM0u"
@@ -21,7 +22,6 @@ export const UserLogin = () => {
       // logIn returns the corresponding ParseUser object
       const loggedInUser = await Parse.User.logIn(fullnameValue, passwordValue);
       alert(`${loggedInUser.get("username")} has successfully signed in!`);
-      // To verify that this is in fact the current user, `current` can be used
       const currentUser = await Parse.User.current();
       console.log(loggedInUser === currentUser);
       // Clear input fields
@@ -31,7 +31,7 @@ export const UserLogin = () => {
       getCurrentUser();
       return true;
     } catch (error) {
-      // Error can be caused by wrong parameters or lack of Internet connection
+      // Output a relevant error message
       alert(`Error! ${error.message}`);
       return false;
     }

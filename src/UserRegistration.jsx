@@ -11,23 +11,37 @@ export const UserRegistration = () => {
 
   const doUserRegistration = async function () {
     const fullnameValue = fullname;
+    // using bcrypt to encrypt the password before sent to the database
     const passwordValue = bcrypt.hashSync(
       password,
       "$2a$10$CwTycUXWue0Thq9StjUM0u"
     );
-    const passRegex = new RegExp("^(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");
-    // while pass does not meet conditions prompt to re-enter password
 
-    if (passRegex.test(passwordValue)) {
-      const createdUser = await Parse.User.signUp(fullnameValue, passwordValue);
-      alert(`User ${createdUser.getUsername()} was successfully created!`);
-      // clears the input fields upon a successful registration
-      setFullname("");
-      setPassword("");
-      setEmail("");
-      return true;
+    // this regex checks for a minimum of 8 characters with at least one number and one special character
+    const passRegex = new RegExp("^(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");
+    // this regex checks for a minimum of 5 letters
+    const fullnameRegex = new RegExp("^[a-zA-Z0-9s,-]{5,}");
+
+    // if username and password meet criteria then create a new user
+    if (passRegex.test(password)) {
+      console.log("password not valid");
+      if (fullnameRegex.test(fullnameValue)) {
+        const createdUser = await Parse.User.signUp(
+          fullnameValue,
+          passwordValue
+        );
+        alert(`User ${createdUser.getUsername()} was successfully created!`);
+        // clears the input fields upon a successful registration
+        setFullname("");
+        setPassword("");
+        setEmail("");
+        return true;
+      } else {
+        console.log(fullnameRegex.test(fullnameValue));
+        alert(`Full name must be at least 5 letters long.`);
+      }
+      // if password does not meet conditions give user an alert
     } else {
-      // alert(`Error! ${error}`)
       alert(
         `Password must be a minimum of 8 characters and including at least one number and one special character.`
       );
