@@ -14,7 +14,7 @@ NOTES
 - Parse is used for registration, login and logout actions
 - Password is encrypted using bcryptjs
 
-IMPROVEMENTS
+FUTURE IMPROVEMENTS
 
 - Need to integrate e-mail into Parse in order to send it to the database
 - More detailed automated tests to be written
