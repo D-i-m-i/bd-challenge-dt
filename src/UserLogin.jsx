@@ -50,7 +50,7 @@ export const UserLogin = () => {
     try {
       await Parse.User.logOut();
       // Update state variable holding current user
-      getCurrentUser();
+      await getCurrentUser();
 
       // clear the current localstorage session
       localStorage.clear();

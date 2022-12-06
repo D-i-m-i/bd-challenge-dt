@@ -22,30 +22,37 @@ export const UserRegistration = () => {
     // this regex checks for a minimum of 5 letters
     const fullnameRegex = new RegExp("^[a-zA-Z0-9s,-]{5,}");
 
-    // if username and password meet criteria then create a new user
-    if (passRegex.test(password)) {
-      if (fullnameRegex.test(fullnameValue)) {
-        const createdUser = await Parse.User.signUp(
-          fullnameValue,
-          passwordValue
-        );
-        alert(
-          `User ${createdUser.getUsername()} was successfully created! You can now login`
-        );
-        // clears the input fields upon a successful registration
-        setFullname("");
-        setPassword("");
-        setEmail("");
-        return true;
+    try {
+      if (passRegex.test(password)) {
+        if (fullnameRegex.test(fullnameValue)) {
+          const createdUser = await Parse.User.signUp(
+            fullnameValue,
+            passwordValue
+          );
+          alert(
+            `User ${createdUser.getUsername()} was successfully created! You can now login`
+          );
+          // clears the input fields upon a successful registration
+          setFullname("");
+          setPassword("");
+          setEmail("");
+          return true;
+        } else {
+          alert(`Full name must be at least 5 letters long.`);
+        }
+        // if password does not meet conditions give user an alert
       } else {
-        alert(`Full name must be at least 5 letters long.`);
+        alert(
+          `Password must be a minimum of 8 characters and including at least one number and one special character.`
+        );
       }
-      // if password does not meet conditions give user an alert
-    } else {
-      alert(
-        `Password must be a minimum of 8 characters and including at least one number and one special character.`
-      );
+    } catch (error) {
+      // Output a relevant error message
+      alert(`${error.message}`);
+      return false;
     }
+
+    // if username and password meet criteria then create a new user
   };
 
   return (
