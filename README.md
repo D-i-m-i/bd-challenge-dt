@@ -13,6 +13,7 @@ NOTES
 - back4end is used for the back-end/database side
 - Parse is used for registration, login and logout actions
 - Password is encrypted using bcryptjs
+- persistent login done using localStorage
 
 FUTURE IMPROVEMENTS
 
