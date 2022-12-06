@@ -22,13 +22,22 @@ export const UserLogin = () => {
       // logIn returns the corresponding ParseUser object
       const loggedInUser = await Parse.User.logIn(fullnameValue, passwordValue);
       alert(`${loggedInUser.get("username")} has successfully signed in!`);
-      const currentUser = await Parse.User.current();
-      console.log(loggedInUser === currentUser);
+
       // Clear input fields
       setFullname("");
       setPassword("");
+
       // Update state variable holding current user
       getCurrentUser();
+
+      localStorage.setItem(
+        "currentUser",
+        JSON.stringify(await Parse.User.current())
+      );
+
+      localStorage.getItem(currentUser);
+      localStorage.setItem("currentUserId", loggedInUser["id"]);
+
       return true;
     } catch (error) {
       // Output a relevant error message
@@ -42,6 +51,10 @@ export const UserLogin = () => {
       await Parse.User.logOut();
       // Update state variable holding current user
       getCurrentUser();
+
+      // clear the current localstorage session
+      localStorage.clear();
+
       return true;
     } catch (error) {
       alert(`Error! ${error.message}`);
@@ -66,7 +79,8 @@ export const UserLogin = () => {
         />
         <p className="header_text_bold">{"Demetris' Challenge App"}</p>
       </div>
-      {currentUser === null && (
+      {/* {currentUser === null && ( */}
+      {localStorage.getItem("currentUser") === null && (
         <div className="container">
           <h2 className="heading">{"User Login"}</h2>
           <div className="form_wrapper">
@@ -104,12 +118,14 @@ export const UserLogin = () => {
           <UserRegistration />
         </div>
       )}
-      {currentUser !== null && (
+
+      {/* {currentUser !== null && ( */}
+      {localStorage.getItem("currentUser") !== null && (
         <div className="container" style={{ display: "flex" }}>
           <div>
-            <h2 className="heading">{`Welcome ${currentUser.get(
-              "username"
-            )}! To logout click`}</h2>
+            <h2 className="heading">{`Welcome ${
+              JSON.parse(localStorage.getItem("currentUser"))["username"]
+            }! To logout click`}</h2>
           </div>
           <div style={{ margin: "12px 0 0 5px" }}>
             <Button

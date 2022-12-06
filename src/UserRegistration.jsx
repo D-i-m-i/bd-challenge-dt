@@ -24,20 +24,20 @@ export const UserRegistration = () => {
 
     // if username and password meet criteria then create a new user
     if (passRegex.test(password)) {
-      console.log("password not valid");
       if (fullnameRegex.test(fullnameValue)) {
         const createdUser = await Parse.User.signUp(
           fullnameValue,
           passwordValue
         );
-        alert(`User ${createdUser.getUsername()} was successfully created!`);
+        alert(
+          `User ${createdUser.getUsername()} was successfully created! You can now login`
+        );
         // clears the input fields upon a successful registration
         setFullname("");
         setPassword("");
         setEmail("");
         return true;
       } else {
-        console.log(fullnameRegex.test(fullnameValue));
         alert(`Full name must be at least 5 letters long.`);
       }
       // if password does not meet conditions give user an alert
