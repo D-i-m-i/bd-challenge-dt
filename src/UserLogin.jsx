@@ -11,9 +11,8 @@ export const UserLogin = () => {
   const [currentUser, setCurrentUser] = useState(null);
 
   const doUserLogIn = async function () {
-    // Note that these values come from state variables that we've declared before
     const fullnameValue = fullname;
-    // reading the password using bcrypt used during registration
+    // reading the password using bcrypt (also used during registration)
     const passwordValue = bcrypt.hashSync(
       password,
       "$2a$10$CwTycUXWue0Thq9StjUM0u"
@@ -48,12 +47,15 @@ export const UserLogin = () => {
 
   const doUserLogOut = async function () {
     try {
-      await Parse.User.logOut();
-      // Update state variable holding current user
-      await getCurrentUser();
-
       // clear the current localstorage session
       localStorage.clear();
+      // setTimeout userd to prevent the login screen sometimes not showing after logging out
+      // await Parse.User.logOut();
+      setTimeout(await Parse.User.logOut(), 100);
+
+      alert("Successfully logged out");
+      // Update state variable holding current user
+      getCurrentUser();
 
       return true;
     } catch (error) {
@@ -79,6 +81,7 @@ export const UserLogin = () => {
         />
         <p className="header_text_bold">{"Demetris' Challenge App"}</p>
       </div>
+
       {/* {currentUser === null && ( */}
       {localStorage.getItem("currentUser") === null && (
         <div className="container">
