@@ -11,20 +11,22 @@ export const UserRegistration = () => {
 
   const doUserRegistration = async function () {
     const fullnameValue = fullname;
-    // using bcrypt to encrypt the password before sent to the database
+    // using bcrypt (also used during login) to hash the password before sent to the database
     const passwordValue = bcrypt.hashSync(
       password,
       "$2a$10$CwTycUXWue0Thq9StjUM0u"
     );
 
-    // this regex checks for a minimum of 8 characters with at least one number and one special character
+    // checks for a minimum of 8 characters with at least one number and one special character
     const passRegex = new RegExp("^(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");
-    // this regex checks for a minimum of 5 letters
-    const fullnameRegex = new RegExp("^[a-zA-Z0-9s,-]{5,}");
+    // checks for a minimum of 5 letters
+    const fullnameRegex = new RegExp("^[a-zA-Z0-9]{5,}$");
+    // const fullnameRegex = new RegExp("^[a-zA-Z0-9s,-]{5,}");
 
     try {
       if (passRegex.test(password)) {
-        if (fullnameRegex.test(fullnameValue)) {
+        // testing for the total length of the full name
+        if (fullnameRegex.test(fullnameValue.split(" ").join(""))) {
           const createdUser = await Parse.User.signUp(
             fullnameValue,
             passwordValue
@@ -38,7 +40,9 @@ export const UserRegistration = () => {
           setEmail("");
           return true;
         } else {
-          alert(`Full name must be at least 5 letters long.`);
+          alert(
+            `Full name must be at least 5 characters long (numbers can be used).`
+          );
         }
         // if password does not meet conditions give user an alert
       } else {
@@ -51,7 +55,6 @@ export const UserRegistration = () => {
       alert(`${error.message}`);
       return false;
     }
-
     // if username and password meet criteria then create a new user
   };
 
